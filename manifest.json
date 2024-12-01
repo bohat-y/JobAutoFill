@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Form Autofill",
+  "version": "1.0",
+  "description": "Autofill forms for job applications.",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "scripts": ["dist/background.js"]
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": "src/icons/icon.png"
+  },
+  "icons": {
+    "48": "src/icons/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dist/content.js"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "formautofill@example.com"
+    }
+  }
+}
