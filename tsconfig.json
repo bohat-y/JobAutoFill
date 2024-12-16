@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "CommonJS",
+    "module": "ESNext", // Use ESNext to generate browser-compatible modules
     "strict": true,
     "outDir": "./dist",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["webextension-polyfill"]
   },
   "include": ["src/**/*"]
 }
