@@ -1,34 +1,24 @@
-import browser from "webextension-polyfill";
-
-// Define the profile structure
-interface Profile {
-    name: string;
-    email: string;
-    phone: string;
-}
-
-// Save profile to browser storage
 const saveButton = document.getElementById("save") as HTMLButtonElement;
 
 saveButton.addEventListener("click", () => {
-    const profile: Profile = {
+    const profile = {
         name: (document.getElementById("name") as HTMLInputElement).value,
         email: (document.getElementById("email") as HTMLInputElement).value,
         phone: (document.getElementById("phone") as HTMLInputElement).value,
     };
 
+    // @ts-ignore
     browser.storage.sync.set({ profile }).then(() => {
         console.log("Profile saved successfully:", profile);
         alert("Profile saved!");
-    }).catch((error) => {
+    }).catch((error: any) => {
         console.error("Error saving profile:", error);
     });
 });
 
-// Autofill popup fields with existing profile data
+// @ts-ignore
 browser.storage.sync.get("profile").then((result) => {
-    const data = result as { profile: Profile }; // Explicitly cast the returned data
-    const profile = data.profile;
+    const profile = result.profile as { name: string; email: string; phone: string };
 
     if (profile) {
         (document.getElementById("name") as HTMLInputElement).value = profile.name || "";
@@ -38,6 +28,6 @@ browser.storage.sync.get("profile").then((result) => {
     } else {
         console.log("No existing profile found.");
     }
-}).catch((error) => {
+}).catch((error: any) => {
     console.error("Error retrieving profile:", error);
 });

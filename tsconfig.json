@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "ESNext", // Use ESNext to generate browser-compatible modules
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "strict": true,
-    "outDir": "./dist",
     "esModuleInterop": true,
+    "outDir": "./dist",
     "types": ["webextension-polyfill"]
   },
   "include": ["src/**/*"]

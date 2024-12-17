@@ -1,29 +1,20 @@
-import browser from "webextension-polyfill";
-// Autofill fields using stored profile
+"use strict";
+// @ts-ignore
 browser.storage.sync.get("profile").then((result) => {
-    const data = result; // Explicitly cast the returned data
-    const profile = data.profile;
+    const profile = result.profile;
     if (profile) {
         console.log("Autofill Profile Data:", profile);
         const firstNameField = document.querySelector('input[name="job_application[first_name]"]');
         const emailField = document.querySelector('input[name="job_application[email]"]');
         const phoneField = document.querySelector('input[name="job_application[phone]"]');
-        if (firstNameField) {
+        if (firstNameField)
             firstNameField.value = profile.name || "";
-            console.log("First Name field autofilled.");
-        }
-        if (emailField) {
+        if (emailField)
             emailField.value = profile.email || "";
-            console.log("Email field autofilled.");
-        }
-        if (phoneField) {
+        if (phoneField)
             phoneField.value = profile.phone || "";
-            console.log("Phone field autofilled.");
-        }
-    }
-    else {
-        console.log("No profile data found.");
+        console.log("Form autofilled successfully.");
     }
 }).catch((error) => {
-    console.error("Error retrieving profile:", error);
+    console.error("Error autofilling profile:", error);
 });

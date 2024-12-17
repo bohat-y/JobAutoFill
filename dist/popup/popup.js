@@ -1,5 +1,4 @@
-import browser from "webextension-polyfill";
-// Save profile to browser storage
+"use strict";
 const saveButton = document.getElementById("save");
 saveButton.addEventListener("click", () => {
     const profile = {
@@ -7,6 +6,7 @@ saveButton.addEventListener("click", () => {
         email: document.getElementById("email").value,
         phone: document.getElementById("phone").value,
     };
+    // @ts-ignore
     browser.storage.sync.set({ profile }).then(() => {
         console.log("Profile saved successfully:", profile);
         alert("Profile saved!");
@@ -14,10 +14,9 @@ saveButton.addEventListener("click", () => {
         console.error("Error saving profile:", error);
     });
 });
-// Autofill popup fields with existing profile data
+// @ts-ignore
 browser.storage.sync.get("profile").then((result) => {
-    const data = result; // Explicitly cast the returned data
-    const profile = data.profile;
+    const profile = result.profile;
     if (profile) {
         document.getElementById("name").value = profile.name || "";
         document.getElementById("email").value = profile.email || "";
